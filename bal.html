@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you be my belated valentine Ellie?</title>
+<style>
+    body {
+        background-color: #ffceed; /* Bright pink background */
+        font-family: Arial, sans-serif; /* Font family */
+        text-align: center; /* Center align content */
+        padding-top: 50px; /* Add some space from top */
+        position: relative; /* Position relative for absolute positioning of elements */
+    }
+    h1 {
+        color: #c0392b; /* Red text color */
+        font-size: 24px; /* Font size for the prompt */
+    }
+    .button {
+        padding: 10px 20px; /* Button padding */
+        font-size: 16px; /* Button font size */
+        margin: 10px; /* Button margin */
+        cursor: pointer; /* Cursor style */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+    }
+    #yes-btn {
+        background-color: #27ae60; /* Green background color for Yes button */
+        color: white; /* White text color */
+    }
+    #no-btn {
+        background-color: #e74c3c; /* Red background color for No button */
+        color: white; /* White text color */
+    }
+    #flower {
+        max-width: 300px;
+        margin: 20px auto; /* Center the image horizontally */
+        display: block; /* Ensure the image is a block element */
+    }
+    .heart {
+        position: absolute; /* Position hearts absolutely */
+        animation: fall 3s linear; /* Animation for falling hearts */
+    }
+    .heart img {
+        width: 20px; /* Set width of heart images */
+    }
+    .puppy-gif {
+        position: absolute; /* Position puppy gifs absolutely */
+        width: 100px; /* Set width of puppy gifs */
+        z-index: 1; /* Ensure puppy gifs are above other content */
+    }
+    .photo {
+        position: absolute; /* Position photos absolutely */
+        width: 150px; /* Set width of photos */
+        z-index: 1; /* Ensure photos are above other content */
+    }
+    /* Adjustments for specific photo positions */
+    .photo:nth-child(1) {
+        left: 20%;
+        transform: translateX(+5%);
+        top: 150px;
+    }
+    .photo:nth-child(2) {
+        left: 20%;
+        transform: translateX(+5%);
+        top: 250px;
+    }
+    .photo:nth-child(3) {
+        left: 20%;
+        transform: translateX(+5%);
+        top: 350px;
+    }
+    /* Additional adjustments for photos */
+    .photo-bouquet {
+        width: 200px; /* Larger width for photo */
+        left: calc(50% - 100px); /* Center horizontally */
+        top: 40px; /* Position above the bouquet */
+    }
+    .photo-right {
+        right: 80px; /* Position to the right */
+        top: 200px; /* Align with the top of the bouquet */
+    }
+    .photo-below {
+        left: 50%; /* Center horizontally */
+        transform: translateX(-100%);
+        top: 500px; /* Position below the bouquet */
+    }
+</style>
+</head>
+<body>
+<div>
+    <h1>Will you be my belated valentine Ellie?</h1>
+    <button class="button" id="yes-btn">Yes</button>
+    <button class="button" id="no-btn">No</button>
+    <img src="https://i.imgur.com/wFkIPZM.jpeg" alt="Ellie" id="flower">
+</div>
+
+<!-- Cute puppy gifs -->
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="puppy-gif" style="top: 20px; left: 20px;" alt="Puppy">
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="puppy-gif" style="top: 20px; right: 20px;" alt="Puppy">
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="puppy-gif" style="bottom: 20px; left: 20px;" alt="Puppy">
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="puppy-gif" style="bottom: 20px; right: 20px;" alt="Puppy">
+
+<!-- Additional photos -->
+<img src="https://i.imgur.com/vRLuhpn.jpeg" class="photo photo-right" alt="Photo 2">
+<img src="https://i.imgur.com/xHmZHOO.jpeg" class="photo photo-below" alt="Photo 3">
+
+<script>
+    document.getElementById("yes-btn").addEventListener("click", function() {
+        // Show hearts and "I love you" message
+        document.body.style.backgroundImage = "url('https://emojicdn.elk.sh/❤️')";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "contain";
+        document.body.style.color = "red";
+        document.body.innerHTML += "<h2 id='love-message'>I love you</h2>";
+        animateHearts();
+        animateLoveMessage();
+        setTimeout(function() {
+            document.getElementById('love-message').style.display = 'none';
+            document.getElementById('flower').src = 'https://foreverflowering.com.au/cdn/shop/files/Babys-Breath-White-Real-Touch-1.jpg?v=1690640064&width=1920'; // Replace with the bouquet image URL
+            // Remove puppy gifs
+            const puppyGifs = document.querySelectorAll('.puppy-gif');
+            puppyGifs.forEach(function(puppyGif) {
+                puppyGif.remove();
+            });
+            setTimeout(function() {
+                document.body.innerHTML += "<p>good girl&lt;3</p>"; // Add "good girl<3" after 3 seconds
+            }, 3000);
+        }, 5000); // After 3 seconds, replace the love message with the bouquet image
+    });
+
+    document.getElementById("no-btn").addEventListener("click", function() {
+        // Turn the screen black and show "So you hate me then?" message
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "red";
+        document.body.innerHTML = "<h2>So you hate me then?</h2>";
+    });
+
+    function animateHearts() {
+        for (let i = 0; i < 20; i++) {
+            createHeart();
+        }
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.innerText = '❤️';
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animation = 'fall 3s linear';
+        document.body.appendChild(heart);
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+
+    function animateLoveMessage() {
+        const loveMessage = document.getElementById('love-message');
+        let scale = 1;
+        setInterval(() => {
+            scale *= -1;
+            loveMessage.style.transform = `scale(${1 + 0.1 * scale})`;
+        }, 200);
+    }
+</script>
+</body>
+</html>
